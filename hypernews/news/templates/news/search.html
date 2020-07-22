@@ -1,0 +1,32 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<head>
+    <h2>Hyper news</h2>
+</head>
+<body>
+    <a href="/news/create/">Create note!</a>
+    <br>
+    {% for day, articles_by_date in articles_1.items %}
+        <h4> {{ day }} </h4>
+
+        <ul>
+        {% for article in articles_by_date %}
+            <li><a href="/news/{{ article.link }}/"> {{ article.title }} </a></li>
+        {% endfor %}
+        </ul>
+
+    {% endfor %}
+
+
+    <br>
+    <form action="/news/" method="get">
+        {% csrf_token %}
+        <p>Search by title:</p>
+        <input type="text" name="q">
+        <br>
+        <br>
+        <button type="submit" formaction="/news/">Search</button>
+    </form>
+
+</body>
+</html>
